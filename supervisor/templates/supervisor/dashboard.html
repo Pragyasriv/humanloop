@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supervisor Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        a { text-decoration: none; color: blue; }
+    </style>
+</head>
+<body>
+<h1>Supervisor Dashboard</h1>
+
+<h2>Pending Requests</h2>
+{% if pending %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Question</th>
+        <th>Action</th>
+    </tr>
+    {% for req in pending %}
+    <tr>
+        <td>{{ req.id }}</td>
+        <td>{{ req.customer.name }}</td>
+        <td>{{ req.question }}</td>
+        <td><a href="{% url 'supervisor:respond' req.id %}">Respond</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No pending requests.</p>
+{% endif %}
+
+<h2>Resolved Requests</h2>
+{% if resolved %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Question</th>
+        <th>Answer</th>
+    </tr>
+    {% for req in resolved %}
+    <tr>
+        <td>{{ req.id }}</td>
+        <td>{{ req.customer.name }}</td>
+        <td>{{ req.question }}</td>
+        <td>{{ req.supervisor_response.answer }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No resolved requests yet.</p>
+{% endif %}
+</body>
+</html>

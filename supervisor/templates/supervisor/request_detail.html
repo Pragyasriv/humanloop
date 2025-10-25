@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request Detail</title>
+</head>
+<body>
+<h1>Request #{{ request.id }}</h1>
+<p><strong>Customer:</strong> {{ request.customer.name }}</p>
+<p><strong>Question:</strong> {{ request.question }}</p>
+<p><strong>Description:</strong> {{ request.description }}</p>
+<p><strong>Status:</strong> {{ request.status }}</p>
+
+{% if request.supervisor_response %}
+    <p><strong>Supervisor Answer:</strong> {{ request.supervisor_response.answer }}</p>
+{% else %}
+    <p>No supervisor response yet.</p>
+{% endif %}
+
+<p><a href="{% url 'supervisor:dashboard' %}">Back to Dashboard</a></p>
+</body>
+</html>

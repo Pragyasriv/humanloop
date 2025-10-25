@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Respond to Request</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 100px; margin-bottom: 10px; }
+        input[type="submit"] { padding: 8px 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+<h1>Respond to Request #{{ request.id }}</h1>
+
+<p><strong>Customer:</strong> {{ request.customer.name }}</p>
+<p><strong>Question:</strong> {{ request.question }}</p>
+<p><strong>Description:</strong> {{ request.description }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="answer">Your Answer:</label><br>
+    <textarea id="answer" name="answer" required></textarea><br>
+    <input type="submit" value="Submit Response">
+</form>
+
+<p><a href="{% url 'supervisor:dashboard' %}">Back to Dashboard</a></p>
+</body>
+</html>
